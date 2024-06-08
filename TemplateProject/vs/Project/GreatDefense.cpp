@@ -2,7 +2,7 @@
 
 Engine::GreatDefense::GreatDefense(Setting* setting) :Engine::Game(setting)
 {
-	setting->windowTitle = "Great Defense";
+	setting->windowTitle = "The Great Defense";
 }
 
 Engine::GreatDefense::~GreatDefense()

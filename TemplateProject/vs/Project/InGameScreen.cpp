@@ -14,7 +14,7 @@ void Engine::InGameScreen::Init()
 	towerstex = new Texture("turrets.png");
 	explosiontex = new Texture("explode.png");
 	poisontex = new Texture("psn.png");
-	currency = 10;
+	currency = 12;
 	gamestate = GameState::NORMAL;
 	towerloc = vec2((game->GetSettings()->screenWidth / 2) - 64, game->GetSettings()->screenHeight / 2 - 64);
 	rot = 180;
@@ -23,7 +23,6 @@ void Engine::InGameScreen::Init()
 		->SetText("HP 10")->SetPosition(60, game->GetSettings()->screenHeight - 60)->SetColor(235, 229, 52);
 	currencytext = (new Text("8-bit Arcade In.ttf", 20, game->GetDefaultTextShader()))
 		->SetText("Currency 10")->SetPosition(60, game->GetSettings()->screenHeight - 80)->SetColor(235, 229, 52);
-	CreateChoices();
 	wavetext = (new Text("8-bit Arcade In.ttf", 20, game->GetDefaultTextShader()))
 		->SetText("Wave 1")->SetPosition(60, game->GetSettings()->screenHeight - 100)->SetColor(235, 229, 52);
 	CreateChoices();
@@ -490,11 +489,6 @@ void Engine::InGameScreen::Update()
 				
 			}
 		}
-		if (!explosions.empty() && explosions.front() != nullptr) {
-			for (Sprite* explsn : explosions) {
-				
-			}
-		}
 
 		for (Enemy* e : enemies) {
 			clear = true;
@@ -508,7 +502,7 @@ void Engine::InGameScreen::Update()
 		if (clear) {
 			if(wave<=8){
 				wave += 1;
-				currency += 8;
+				currency += 6;
 				for (Tower* t : towers) {
 					t->ResetTimer();
 					t->ResetAnimTimer();
@@ -640,7 +634,7 @@ void Engine::InGameScreen::StartWave() {
 		e->SetPosition(spawn.x, spawn.y);
 		e->SetTarget(targets);
 		e->SetMaxSpeed(0.05f + 0.005f * wave);
-		e->SetHP(150 + wave * 15);
+		e->SetHP(200 + wave * 30);
 		Text* ehp = new Text("8-bit Arcade In.ttf", 25, game->GetDefaultTextShader());
 		ehp->SetText(to_string(e->GetHP()))->SetPosition(e->GetPosition().x + 20, e->GetPosition().y + 50)->SetColor(255, 255, 255);
 		e->setText(ehp);
